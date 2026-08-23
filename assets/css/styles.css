@@ -638,6 +638,13 @@ nav.site-nav {
   opacity: 1;
 }
 
+/* ── MC SECTION ── */
+.mc-section {
+  padding: 80px 5vw;
+  background: #0c1420;
+  border-top: 1px solid rgb(255 255 255 / 4%);
+}
+
 /* ── FEDERAL AGENCIES ──────────────────────────────────── */
 
 .federal {
@@ -704,6 +711,92 @@ nav.site-nav {
   line-height: 1.8;
   color: var(--muted);
   text-transform: uppercase;
+}
+
+/* ── FLOCK 101 ── */
+.flock101 {
+  padding: 80px 5vw;
+  background: var(--dark);
+  border-top: 3px solid var(--red);
+}
+
+.flock101-heading {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.flock101-sub {
+  font-size: 1.05rem;
+  color: #9aa6b2;
+  line-height: 1.6;
+  max-width: 60ch;
+  margin-bottom: 2.5rem;
+}
+
+.flock101-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: rgb(255 255 255 / 5%);
+  border: 1px solid rgb(255 255 255 / 5%);
+}
+
+.flock101-item {
+  background: var(--dark);
+  padding: 2rem;
+  border-left: 3px solid var(--red);
+  transition: background 0.2s;
+}
+
+.flock101-item:hover {
+  background: #161b22;
+}
+
+.flock101-q {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.6rem;
+  color: var(--white);
+}
+
+.flock101-a {
+  font-size: 0.95rem;
+  color: #9aa6b2;
+  line-height: 1.7;
+}
+
+.flock101-a a {
+  color: var(--red);
+  text-decoration: none;
+  border-bottom: 1px solid rgb(220 38 38 / 30%);
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.flock101-a a:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+.flock101-a a[target="_blank"] {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 1px solid transparent;
+}
+
+.flock101-a a[target="_blank"]:hover {
+  border-color: #fff;
 }
 
 /* ── DEMANDS ───────────────────────────────────────────── */
@@ -833,18 +926,18 @@ nav.site-nav {
 
 /* ── TAKE ACTION (hosts the contact tool) ──────────────── */
 
-.action {
+.email-officals {
   padding: 6rem 5vw;
   background: var(--black);
   border-top: 1px solid var(--hairline);
 }
 
-.action-intro {
+.email-intro {
   max-width: 720px;
   margin-bottom: 3rem;
 }
 
-.action-intro p {
+.email-intro p {
   color: var(--dim);
   line-height: 1.7;
   margin-top: 1rem;
@@ -1573,6 +1666,70 @@ div.person-card a {
 .btn-dark:hover {
   background: rgb(0 0 0 / 20%);
   border-color: var(--white);
+}
+
+/* ── ACTION ── */
+.action {
+  padding: 80px 5vw;
+  background: var(--red);
+  text-align: center;
+}
+
+.action h2 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  text-transform: uppercase;
+  line-height: 0.95;
+  margin-bottom: 1.5rem;
+}
+
+.action p {
+  font-size: 1.05rem;
+  max-width: 480px;
+  margin: 0 auto 2.5rem;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+.action .btn-white {
+  background: var(--white);
+  color: var(--red);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 700;
+  transition: all 0.2s;
+  margin: 0.4rem;
+}
+
+.action .btn-white:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 30%);
+}
+
+.action .btn-dark {
+  background: rgb(0 0 0 / 25%);
+  color: var(--white);
+  border: 1px solid rgb(255 255 255 / 40%);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+  margin: 0.4rem;
+}
+
+.action .btn-dark:hover {
+  background: rgb(0 0 0 / 40%);
+  transform: translateY(-3px);
 }
 
 /* ── FOOTER ────────────────────────────────────────────── */
