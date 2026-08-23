@@ -23,9 +23,10 @@
       <a class="nav-logo" href="index.html"><span>De</span>Flock Mesa County</a>
       <ul class="nav-links">
         <li><a href="index.html#findings">Findings</a></li>
+        <li><a href="index.html#evidence">Evidence</a></li>
+        <li><a href="index.html#federal">Federal Access</a></li>
         <li><a href="index.html#demands">Demands</a></li>
         <li><a href="index.html#act">Take Action</a></li>
-        <li><a href="index.html#signup">Sign Up</a></li>
         <li><a href="cora.html">CORA Toolkit →</a></li>
       </ul>
     </nav>
@@ -36,152 +37,268 @@
       <button type="button">Dismiss</button>
     </div>
 
-    <header class="page-head">
-      <p class="section-label">// Start Here</p>
-      <h1 class="section-heading">Flock 101</h1>
-      <p class="section-sub">
-        What automated license plate readers actually do, why a camera on a
+    <!-- ── HERO ────────────────────────────────────────── -->
+    <section class="hero">
+      <p class="hero-label">
+        <span>Mesa County, CO</span>
+        <span class="todo">TODO: sponsoring group / working group name</span>
+      </p>https://mesacountycommunity.github.io/deflockmesacounty/index.html#contact-mesa-county
+      <h1>Flock<br /><em>101.</em></h1>
+      <p class="hero-sub">
+        New here? Start here. A plain-English explanation of what Fock Safety is,
+        what automated license plate readers actually do, why a camera on a
         pole in Grand Junction is a national database question, and what any of
         it has to do with you.
       </p>
-    </header>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#basics">The Basics</a>
+        <a class="btn btn-outline" href="#ptz">PTZ Cameras</a>
+        <a class="btn btn-outline" href="flock-101.html">New Here? Flock 101 →</a>
+        <a class="btn btn-outline" href="flock-101.html">New Here? Flock 101 →</a>
+        <a class="btn btn-outline" href="flock-101.html">New Here? Flock 101 →</a>
+      </div>
+    </section>
 
-    <main class="page-body">
-      <article class="prose">
-        <h2>What is an ALPR?</h2>
-        <p>
-          An automated license plate reader is a camera that photographs every
-          passing vehicle, reads the plate with software, and writes a
-          timestamped record — plate, location, direction, and usually a photo
-          of the vehicle — into a searchable database. It does this to every
-          car, continuously, with no suspicion of anything.
-        </p>
-        <p>
-          Flock Safety is the largest vendor selling these to local police
-          departments and homeowners' associations in the United States. It is
-          not the only one, and this campaign is about the technology and the
-          contracts, not one company's name.
-        </p>
+    <!-- THE BASICS -->
+    <section class="flock101" id="basics">
+      <p class="section-label">// The Basics</p>
+      <h2 class="flock101-heading">What Is Flock?</h2>
+      <p class="flock101-sub">
+        Flock Safety is a private surveillance company. Their cameras are everywhere, and the way
+        they share data is the whole point.
+      </p>
+      <div class="flock101-list">
+        <div class="flock101-item">
+          <div class="flock101-q">What is Flock Safety?</div>
+          <div class="flock101-a">
+            A private surveillance company that sells automated license plate readers (ALPRs) to
+            police departments, HOAs, and private businesses. Each camera captures a photo of every
+            passing vehicle: plate, make, color, distinguishing features, and timestamps the
+            location.
+          </div>
+        </div>
+        <div class="flock101-item">
+          <div class="flock101-q">What's the network?</div>
+          <div class="flock101-a">
+            Every Flock camera is part of a national mesh. When NCSO, Grass Valley PD, and Nevada
+            City PD installed Flock cameras, they didn't just install local cameras. They plugged
+            Nevada County into a database searchable by thousands of other Flock-connected agencies
+            across the country. Out of state. Federal. The default is "share with everyone."
+          </div>
+        </div>
+        <div class="flock101-item">
+          <div class="flock101-q">Who can search the data?</div>
+          <div class="flock101-a">
+            Any agency with a Flock account, by default. That's thousands of police departments,
+            sheriff's offices, federal agencies, and university PDs. Searches happen without
+            warrants, without notification, and (here) without recorded reasons.
+          </div>
+        </div>
+        <div class="flock101-item">
+          <div class="flock101-q">What does a "search" actually do?</div>
+          <div class="flock101-a">
+            An officer enters a plate, a partial plate, or a vehicle description. Flock returns
+            every camera that's seen a matching vehicle, plotted on a map with timestamps. Repeat
+            searches build movement histories: where someone goes, when, and how often.
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <h2>Why "just a camera" undersells it</h2>
-        <p>
-          A single camera records one road. The product being sold is the
-          network: cameras from thousands of agencies feeding one system that
-          any participating agency can search. That turns a local traffic
-          record into a national location history.
-        </p>
-        <p>
-          Two things follow from that, and they are the whole argument:
-        </p>
-        <ul>
-          <li>
-            <strong>Everyone is in it.</strong> The database is built from
-            every vehicle that passes, not from suspects. Being in it requires
-            nothing but driving.
-          </li>
-          <li>
-            <strong>The searching is done by strangers.</strong> Most searches
-            of a local agency's cameras are typically run by other agencies,
-            often in other states. The local department that installed the
-            camera is not the one deciding who looks.
-          </li>
-        </ul>
+    <!-- COMMON OBJECTIONS -->
+    <section class="flock101" id="objections" style="border-top: none">
+      <p class="section-label">// Why Should I Care</p>
+      <h2 class="flock101-heading">The Common Objections</h2>
+      <div class="flock101-list">
+        <div class="flock101-item">
+          <div class="flock101-q">"I have nothing to hide."</div>
+          <div class="flock101-a">
+            The question isn't whether you have something to hide, it's who gets
+            to decide what counts as worth looking at, and when. A location
+            history is a record of which doctor you see, which church or union
+            hall you attend, whose house you stayed at overnight, and which
+            protest you parked near. None of that is hidden. All of it is
+            nobody's business by default.
+          </div>
+        </div>
+        <div class="flock101-item">
+          <div class="flock101-q">"It solves crimes</div>
+          <div class="flock101-a">
+            Sometimes it contributes to one. The honest version of this argument
+            requires numbers — how many searches, how many arrests, how many
+            convictions — and those numbers are what public records requests are
+            for.
+            <span class="todo">
+              TODO: put the local clearance-rate and search-volume figures here
+              once the records come back, and be straight about what they show
+              even if it's mixed.
+            </span>
+          </div>
+        </div>
+        <div class="flock101-item">
+          <div class="flock101-q">"There are rules about who can access it."</div>
+          <div class="flock101-a">
+            There are policies. A policy is a document the agency writes for
+            itself and can revise. It is not the same as an ordinance the elected
+            body voted on in public, and it is not the same as an audit anyone
+            outside the department ever reads.
+            <span class="todo">
+              TODO: if the audit logs show searches that the stated policy would
+              not permit, this is where that lands — with the citation.
+            </span>
+          </div>
+        </div>
+        <div class="flock101-item">
+          <div class="flock101-q">"It's already everywhere, what's the point?"</div>
+          <div class="flock101-a">
+            Contracts come up for renewal, and communities have declined to renew
+            them.
+            <span class="todo">
+              TODO: cite the current list of places that have dropped ALPR
+              contracts, with dates, and check it before publishing — this list
+              changes month to month and a stale one is worse than none.
+            </span>
+          </div>
+        </div>
+     https://mesacountycommunity.github.io/deflockmesacounty/index.html#contact-mesa-county </div>
+    </section>
 
-        <h2>What that looks like in Mesa County</h2>
-        <p class="todo">
-          TODO: this is the section that makes the page local rather than
-          generic. Name which Mesa County agencies have ALPR contracts, roughly
-          how many cameras are deployed and where, when each contract was
-          signed and whether it went to a public vote, and what the audit logs
-          showed. Cite the records response for every claim. Until this is
-          written from real documents, this page is a national explainer
-          wearing a local name.
-        </p>
+    <!-- COMMUNITIES THAT DEFLOCKED -->
+    <section class="flock101" id="deflocked" style="border-top: none">
+      <p class="section-label">// We're Not The First</p>
+      <h2 class="flock101-heading">Other Communities Already Deflocked.</h2>
+      <p class="flock101-sub">
+        Between August 2021 and May 2026,
+        <strong>82 Flock contracts were terminated across 28 states</strong>, with the pace
+        accelerating sharply in 2025 and 2026
+        (<a
+          href="https://www.govtech.com/spotlight/why-flock-safety-finds-itself-in-a-surveillance-backlash"
+          target="_blank"
+          rel="noopener"
+          >GovTech, citing San Francisco Standard</a
+        >). The reasons are nearly identical to ours: unauthorized federal access, secret
+        installs, and broken promises about how the data would be used.
+      </p>
+      <div class="flock101-list">
+        <div class="flock101-item">
+          <div class="flock101-q">Santa Cruz, CA (first in California)</div>
+          <div class="flock101-a">
+            Santa Cruz became the first city in California to terminate its Flock contract, with
+            the City Council voting 6-1 to end it. If they can do it, so can we.
+            <a
+              href="https://www.kqed.org/news/12069705/santa-cruz-the-first-in-california-to-terminate-its-contract-with-flock-safety"
+              target="_blank"
+              rel="noopener"
+              >KQED coverage →</a
+            >
+          </div>
+        </div>
+        <div class="flock101-item">
+          <div class="flock101-q">Mountain View, CA (Feb 2026)</div>
+          <div class="flock101-a">
+            Mountain View's City Council voted unanimously to terminate its Flock contract,
+            citing the same federal access concerns we've documented here in Nevada County.
+            <a
+              href="https://www.mountainview.gov/Home/Components/News/News/1211/284"
+              target="_blank"
+              rel="noopener"
+              >City of Mountain View statement →</a
+            >
+          </div>
+        </div>
+        <div class="flock101-item">
+          <div class="flock101-q">Austin, TX (June 2025)</div>
+          <div class="flock101-a">
+            Canceled after 30+ community groups pressured the city council. The fight was a model
+            for organized municipal opposition.
+            <a
+              href="https://stateofsurveillance.org/articles/surveillance/communities-winning-against-alpr-flock-safety-2025/"
+              target="_blank"
+              rel="noopener"
+              >Read how they did it →</a
+            >
+          </div>
+        </div>
+        <div class="flock101-item">
+          <div class="flock101-q">Denver, South Pasadena, Cambridge, and more</div>
+          <div class="flock101-a">
+            The list keeps growing. Denver is replacing its 111 Flock cameras. South Pasadena
+            declined to renew. Cambridge, MA canceled after Flock installed cameras without
+            authorization. State of Surveillance is tracking the rebellion city by city.
+            <a
+              href="https://stateofsurveillance.org/news/flock-safety-rebellion-cities-canceling-federal-access-2026/"
+              target="_blank"
+              rel="noopener"
+              >See the running list →</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <h2>The common objections</h2>
-
-        <h3>"I have nothing to hide."</h3>
-        <p>
-          The question isn't whether you have something to hide, it's who gets
-          to decide what counts as worth looking at, and when. A location
-          history is a record of which doctor you see, which church or union
-          hall you attend, whose house you stayed at overnight, and which
-          protest you parked near. None of that is hidden. All of it is
-          nobody's business by default.
-        </p>
-
-        <h3>"It solves crimes."</h3>
-        <p>
-          Sometimes it contributes to one. The honest version of this argument
-          requires numbers — how many searches, how many arrests, how many
-          convictions — and those numbers are what public records requests are
-          for.
-          <span class="todo"
-            >TODO: put the local clearance-rate and search-volume figures here
-            once the records come back, and be straight about what they show
-            even if it's mixed.</span
-          >
-        </p>
-
-        <h3>"There are rules about who can access it."</h3>
-        <p>
-          There are policies. A policy is a document the agency writes for
-          itself and can revise. It is not the same as an ordinance the elected
-          body voted on in public, and it is not the same as an audit anyone
-          outside the department ever reads.
-          <span class="todo"
-            >TODO: if the audit logs show searches that the stated policy would
-            not permit, this is where that lands — with the citation.</span
-          >
-        </p>
-
-        <h3>"It's already everywhere, what's the point?"</h3>
-        <p>
-          Contracts come up for renewal, and communities have declined to renew
-          them.
-          <span class="todo"
-            >TODO: cite the current list of places that have dropped ALPR
-            contracts, with dates, and check it before publishing — this list
-            changes month to month and a stale one is worse than none.</span
-          >
-        </p>
-
-        <h2>What you can do about it</h2>
-        <ul>
-          <li>
-            <strong>Find out what's deployed near you.</strong> The
-            crowdsourced map at
+    <!-- WHAT TO DO -->
+    <section class="flock101" id="todo" style="border-top: none">
+      <p class="section-label">// Use Your Power</p>
+      <h2 class="flock101-heading">What Can You Do About It</h2>
+      <div class="flock101-list">
+        <div class="flock101-item">
+          <div class="flock101-q">Find out what's deployed near you</div>
+          <div class="flock101-a">
+            The crowdsourced map at
             <a href="https://deflock.me/" target="_blank" rel="noopener">deflock.me</a>
             shows reported ALPR locations, and you can add one you've spotted.
-          </li>
-          <li>
-            <strong>Ask for the records.</strong> Colorado's open records laws
+          </div>
+        </div>
+        <div class="flock101-item">
+          <div class="flock101-q">Ask for the records</div>
+          <div class="flock101-a">
+            Colorado's open records laws
             are how the audit logs on this site were obtained. The
             <a href="cora.html">CORA toolkit</a> has request language you can
             send today.
-          </li>
-          <li>
-            <strong>Tell the people who signed the contract.</strong> The
-            <a href="index.html#act">contact tool</a> builds an email to your
+          </div>
+        </div>
+        <div class="flock101-item">
+          <div class="flock101-q">Tell the people who signed the contract</div>
+          <div class="flock101-a">
+            The <a href="index.html#act">contact tool</a> builds an email to your
             council or commissioners in about two minutes.
-          </li>
-          <li>
-            <strong>Show up.</strong> Public comment is where contracts get
+          </div>
+        </div>
+        <div class="flock101-item">
+          <div class="flock101-q">Show up</div>
+          <div class="flock101-a">
+            Public comment is where contracts get
             questioned on the record. There are
             <a href="index.html#comment">scripts</a> if you'd rather not write
             one.
-          </li>
-        </ul>
-      </article>
-    </main>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BACK TO HOME -->
+    <section class="action">
+      <h2>See the<br /><em>Receipts.</em></h2>
+      <p>
+        Now that you know what Flock is and why it's illegal here, look at the actual numbers
+        we pulled from the public records.
+      </p>
+      <div>
+        <a class="btn-white" href="index.html#findings">View the Findings →</a>
+        <a class="btn-dark" href="index.html#demands">Read Our Demands →</a>
+      </div>
+    </section>
 
     <footer class="site-footer">
       <p>DeFlock Mesa County · <span class="todo">TODO: group name &amp; contact</span></p>
       <div class="footer-links">
         <a href="index.html">Home</a>
         <span>·</span>
+        <!--
         <a href="cora.html">CORA Toolkit</a>
         <span>·</span>
+        -->
         <a href="https://deflock.me/" target="_blank" rel="noopener">deflock.me</a>
       </div>
     </footer>

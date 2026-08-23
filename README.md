@@ -3,10 +3,9 @@
 A campaign site about automated license plate readers in Mesa County, Colorado,
 with the Mesa County contact tool built into its Take Action section.
 
-The design mirrors [deflocknc.com](https://deflocknc.com) (DeFlock Nevada
-County, CA), which is itself a static GitHub Pages site. **All campaign content
+**All campaign content
 here is placeholder** — see [CONTENT-TODO.md](CONTENT-TODO.md) before
-publishing anything.
+publishing anything on the actual domain
 
 ## Status
 
