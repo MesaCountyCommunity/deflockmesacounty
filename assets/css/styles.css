@@ -6,13 +6,13 @@
    ============================================================ */
 
 :root {
-  --black: #0a0c0f;
+  --black: #1A1D1D;
   --dark: #111318;
-  --navy: #0d1f35;
-  --red: #d62828;
-  --red-dim: #8b1a1a;
+  --navy: #011E2B;
+  --red: #FF4C30;
+  --red-dim: eb231c;
   --orange: #e07b00;
-  --gold: #f0a500;
+  --gold: #53E1E1;
   --white: #f4f0e8;
   --muted: #7a8a96;
   --dim: #b0bec5;
@@ -286,7 +286,7 @@ nav.site-nav {
 }
 
 .hero-sub {
-  max-width: 560px;
+  max-width: 740px;
   margin-top: 2rem;
   font-size: 1.1rem;
   line-height: 1.65;
@@ -732,7 +732,7 @@ nav.site-nav {
   font-size: 1.05rem;
   color: #9aa6b2;
   line-height: 1.6;
-  max-width: 60ch;
+  max-width: 100ch;
   margin-bottom: 2.5rem;
 }
 
