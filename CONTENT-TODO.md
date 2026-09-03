@@ -12,8 +12,15 @@ numbers are dashes.
 
 Work top to bottom. The site should not go public until every box is ticked.
 
-- [ ] **Findings data** — file the records requests (see `cora.html`), get the
-      audit logs back, and fill in the real numbers.
+- [x] **Findings data (interim)** — the `#findings` stats and the ticker are
+      filled from four records obtained by other requesters in 2025 (GJPD
+      audit logs, GJPD's written answers, MCSO's ALPR/camera statement — see
+      `corpus/records/analysis/README.md` in the research repo for method and
+      caveats). **Still open:** these are someone else's records, not ours.
+      File the five drafted requests linked from `cora.html`
+      (`REQ-2026-001`–`005`) to get independently-verified, current numbers,
+      and revisit these four stat cells once responses come back — the MCSO
+      camera count especially is over a year stale.
 - [ ] **Every `todo` span replaced** — `grep -rn 'class="todo"' *.html` must
       return nothing. Delete the whole wrapper element, not just the text.
 - [ ] **Photos** — three `.photo-placeholder` divs in the Evidence section need
