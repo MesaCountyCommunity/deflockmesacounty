@@ -1,24 +1,19 @@
 # DeFlock Mesa County
 
-A campaign site about automated license plate readers in Mesa County, Colorado,
-with the Mesa County contact tool built into its Take Action section.
+A campaign site about automated license plate readers (ALPRs) in Mesa County,
+Colorado. Its purpose is to inform residents of Grand Junction, Fruita,
+Palisade, and Mesa County about how these systems are being used locally, and
+to coordinate the community toward two concrete outcomes: getting the cameras
+removed and getting privacy ordinances passed that govern any future use.
+Everything on the site is built to make that easier — the findings and
+evidence, the Take Action page (contact tool, meeting schedules, public
+comment scripts, events calendar), and the working-group signup — rather
+than just to describe the problem.
 
-**All campaign content
-here is placeholder** — see [CONTENT-TODO.md](CONTENT-TODO.md) before
-publishing anything on the actual domain
-
-## Status
-
-| Part | State |
-|---|---|
-| Design system, layout, all pages | Done |
-| Contact tool, ported and integrated | Done, working against real data |
-| Scraper, validation, scheduled Actions | Done, 51+ tests passing |
-| CORA toolkit — statutes and request templates | Written and usable |
-| Campaign findings, stats, photos, meeting schedules | **Placeholder** |
-| Mailing list form | **Not connected** |
-| Events calendar pipeline | Built, needs a sheet URL — see CONTENT-TODO.md |
-| Public comment script pipeline | Built, needs a sheet URL — see CONTENT-TODO.md |
+Most campaign content is real and the site is close to launch-ready. See
+[CONTENT-TODO.md](CONTENT-TODO.md) for what's still open — a handful of
+numbers that need citations, some thin meeting-schedule and FAQ content, and
+the public comment sheet, which is connected but has no rows yet.
 
 ## How it works
 
@@ -29,14 +24,15 @@ index.html          campaign landing page
 flock-101.html      explainer
 act.html            take-action page: calendar, meetings, comment scripts, contact tool
 join.html           working group signup (Google Form)
-cora.html           Colorado public records toolkit + request templates
+CORA-CCJRA-REFERENCE.md  CORA/CCJRA content, held for a future action tool
 assets/css/         one stylesheet
 assets/js/site.js   page interactions (reveal, comment tabs, copy, signup)
 assets/js/contact-tool.js   the contact tool (act.html)
 assets/js/events.js the calendar renderer (act.html)
 assets/js/comments.js the comment-script renderer (act.html)
 config/locales.json the locale registry, maintained by hand
-data/*.json          scraped contacts + sheet content
+data/*.contacts.json scraped government contacts, one file per locale
+data/*.content.json  campaign email templates + FAQs, one file per locale
 data/events.json     the events calendar, written by fetch-events.js
 data/comments.json   the public comment scripts, written by fetch-comments.js
 scraper/             the scrapers, validation, and diff summary
@@ -50,43 +46,65 @@ The contact tool renders entirely from JSON at runtime:
 - `data/<locale>.content.json` — campaign templates and FAQs from a Google
   Sheet.
 
-Three GitHub Actions keep it current:
+### GitHub Actions
 
-- **`scrape.yml`** (weekly, plus a "Run workflow" button) scrapes each
+Three workflows, all under **Actions** in the GitHub UI, where each can also
+be run on demand: open the **Actions** tab, pick the workflow by name in the
+left sidebar, then use the **Run workflow** button (top right of the workflow
+runs list) to trigger it immediately instead of waiting for its schedule.
+
+- **`scrape.yml`** (Mondays ~7am Mountain, plus "Run workflow") scrapes each
   government site, validates the result, and **opens a pull request** when
   anything changed. Nothing reaches the live site without review. Validation
   failures open an issue and leave the live data untouched, so a redesigned
   city website can never blank out the contact list.
-- **`content.yml`** (daily) pulls the Google Sheets into the content files,
-  the events calendar (`data/events.json`), and the public comment scripts
-  (`data/comments.json`), and commits directly.
+- **`content.yml`** (daily, plus "Run workflow") pulls all four Google
+  Sheets — templates, FAQs, events, and public comment scripts — into
+  `data/`, and **commits directly to `main`** with no PR, since sheet edits
+  are already reviewed by whoever owns the sheet. A fetch that comes back
+  empty never overwrites existing data (see "Updating the sheet content"
+  below); a genuine failure opens or updates a tracking issue instead.
 - **`test.yml`** runs the test suite on every push and pull request.
 
-## Development
+## Updating the sheet content
 
-```bash
-npm install
-npm test                     # parsers, validation, CSV, data schema, events
-npm run scrape               # live scrape into data/
-npm run content               # pull the campaign Google Sheet into data/
-npm run events                # pull the events Google Sheet into data/events.json
-npm run comments              # pull the comments Google Sheet into data/comments.json
-python3 -m http.server 8080  # then open http://localhost:8080/
-```
+Four Google Sheets feed the site, each pulled by its own script in
+`scraper/` and each configured as a URL under `sheets` in
+`config/locales.json`. Edit the sheet, not this repo — `content.yml` pulls
+all four in daily, and each also has an `npm run` script for pulling it by
+hand:
 
-Parser tests run against committed HTML snapshots in `test/fixtures/`, so they
-work offline and pinpoint exactly what broke when a city redesigns its site.
+| Sheet | Purpose | Columns | Writes to | Pulled by |
+|---|---|---|---|---|
+| Templates | Email templates the contact tool hands the resident to send | `locale, title, subject, message` | `data/<locale>.content.json` | `npm run content` |
+| FAQs | Questions/answers shown alongside the contact tool | `locale, question, answer` | `data/<locale>.content.json` | `npm run content` |
+| Public Comment | Scripts for speaking to city council / county commissioners | `jurisdiction, length, message` | `data/comments.json` | `npm run comments` |
+| Events | The events calendar on `act.html` | `date, time, title, location, description, link, featured` | `data/events.json` | `npm run events` |
 
-## Editing campaigns and FAQs
+Notes that apply across all four:
 
-Edit the Google Sheet, not this repo: two tabs, `templates`
-(`locale,title,subject,message`) and `faqs` (`locale,question,answer`). The
-`locale` column takes a locale id (`grand-junction`, `fruita`, `palisade`,
-`mesa-county`). `content.yml` pulls it in daily.
+- The **Templates** and **FAQs** tabs live in one sheet and share the
+  `locale` column, which takes a locale id (`grand-junction`, `fruita`,
+  `palisade`, `mesa-county`) or `all`.
+- **Public Comment** rows use `jurisdiction` (`gj`, `mesa`, or `all`) and
+  `length` (`short`, `personal`, or `long`); an `all` row covers any
+  jurisdiction without its own row for that length, including one added
+  later. Wrap parts the speaker fills in themselves in square brackets, e.g.
+  `[your name]`.
+- A row with a missing required field, an unrecognized locale/jurisdiction,
+  or (for events) a malformed date is skipped and logged rather than shipped
+  broken.
+- A sheet that comes back empty never wipes out the existing data file —
+  the fetch fails loudly (an issue on `content.yml`, a non-zero exit
+  locally) instead of publishing a blank page.
+- Paragraph breaks in a cell are written as the two literal characters `\n`
+  (Alt+Enter makes the column unreadable to edit); the fetch scripts convert
+  them to real line breaks.
 
-The events calendar and the public comment scripts on `act.html` are each a
-separate sheet with their own tab — see "Setting up the events calendar" and
-"Setting up the public comment scripts" in CONTENT-TODO.md.
+To point one of these at a real sheet: **File → Share → Publish to web**,
+choose the tab, export as CSV, and paste the published URL into the matching
+key under `sheets` in `config/locales.json` (`templates`, `faqs`, `events`,
+`comments`).
 
 ## How the contact tool is embedded
 
@@ -120,7 +138,22 @@ GitHub Pages, serving from the repository root on the default branch.
 `.nojekyll` is present so Jekyll doesn't touch the directory. Point a custom
 domain at it with a `CNAME` file if you have one.
 
-**Do not deploy before working through [CONTENT-TODO.md](CONTENT-TODO.md).**
-The pages currently carry `<meta name="robots" content="noindex, nofollow">`
-and a draft banner specifically so a premature deploy can't be indexed or
-mistaken for finished work.
+The `noindex, nofollow` robots meta and draft banner that used to guard
+against a premature deploy have been removed — the site is considered
+launch-ready. Check [CONTENT-TODO.md](CONTENT-TODO.md) for what's still open
+before pointing a real domain at this.
+
+## Development
+
+```bash
+npm install
+npm test                     # parsers, validation, CSV, data schema, events
+npm run scrape               # live scrape into data/
+npm run content               # pull the campaign Google Sheet into data/
+npm run events                # pull the events Google Sheet into data/events.json
+npm run comments              # pull the comments Google Sheet into data/comments.json
+python3 -m http.server 8080  # then open http://localhost:8080/
+```
+
+Parser tests run against committed HTML snapshots in `test/fixtures/`, so they
+work offline and pinpoint exactly what broke when a city redesigns its site.
