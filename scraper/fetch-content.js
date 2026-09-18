@@ -3,11 +3,17 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fetchHtml } from './lib/fetch.js';
 import { parseCsv } from './lib/csv.js';
+import { makeRowNormalizer } from './lib/normalize-row.js';
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 
 const TEMPLATE_FIELDS = ['title', 'subject', 'message'];
 const FAQ_FIELDS = ['question', 'answer'];
+// Sheet owners like to annotate the locale header with the valid values
+// ("locale (all, grand-junction, ...)") — normalize so that still maps to
+// the plain `locale` field, same reasoning as events/comments sheets.
+const normalizeTemplateRow = makeRowNormalizer(['locale', ...TEMPLATE_FIELDS]);
+const normalizeFaqRow = makeRowNormalizer(['locale', ...FAQ_FIELDS]);
 
 // Paragraph breaks are authored in the Sheet as the two literal characters
 // `\` `n`, because putting a real line break in a cell means Alt+Enter and
@@ -72,8 +78,8 @@ export async function buildContent(config, fetchImpl, { readExisting = defaultRe
   if (!tUrl && !fUrl) return null;
   // null (not [] ) marks "this section was not fetched this run" so it can be
   // told apart from "fetched, and the sheet legitimately has zero rows".
-  const templates = tUrl ? parseCsv(await fetchImpl(tUrl)) : null;
-  const faqs = fUrl ? parseCsv(await fetchImpl(fUrl)) : null;
+  const templates = tUrl ? parseCsv(await fetchImpl(tUrl)).map(normalizeTemplateRow) : null;
+  const faqs = fUrl ? parseCsv(await fetchImpl(fUrl)).map(normalizeFaqRow) : null;
   const fetchedAt = new Date().toISOString();
   const knownIds = new Set(config.locales.map(l => l.id));
   const forLocale = (rows, id) => rows.filter(r => r.locale === id || r.locale === 'all');

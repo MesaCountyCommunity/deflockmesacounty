@@ -36,8 +36,8 @@
 
 html {
   scroll-behavior: smooth;
-  /* Fixed 56px nav — anchor targets must not slide under it. */
-  scroll-padding-top: 72px;
+  /* Fixed 56px nav + pinned 40px ticker — anchor targets must not slide under them. */
+  scroll-padding-top: 112px;
 }
 
 /* The draft banner is sticky under the nav, so while it is present an
@@ -52,6 +52,8 @@ body {
   color: var(--white);
   font-family: var(--body);
   overflow-x: hidden;
+  /* Clears the fixed nav (56px) + pinned ticker (40px) that sit on top of the flow. */
+  padding-top: 96px;
 }
 
 /* Scanline overlay */
@@ -286,7 +288,7 @@ nav.site-nav {
 }
 
 .hero-sub {
-  max-width: 740px;
+  max-width: 780px;
   margin-top: 2rem;
   font-size: 1.1rem;
   line-height: 1.65;
@@ -336,27 +338,51 @@ nav.site-nav {
 
 /* ── TICKER ────────────────────────────────────────────── */
 
+.ticker-padding {
+  /* Pinned below the fixed nav so the ticker stays visible while scrolling. */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  padding-top: 56px;
+  background: var(--dark);
+}
+
 .ticker-wrap {
-  background: var(--red-dim);
-  padding: 10px 0;
+  background: var(--gold);
+  height: 40px;
+  display: flex;
+  align-items: center;
   overflow: hidden;
   white-space: nowrap;
   border-top: 1px solid rgb(255 255 255 / 10%);
   border-bottom: 1px solid rgb(255 255 255 / 10%);
 }
 
+.ticker-bold {
+  display: inline-block;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(1rem, 6vw, 1rem);
+  line-height: 1;
+  margin-bottom: 0.1rem;
+  text-transform: uppercase;
+  color: var(--black);
+  animation: scroll-left 800s linear infinite;
+}
+
 .ticker {
   display: inline-block;
   font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--white);
+  color: var(--black);
   animation: scroll-left 44s linear infinite;
 }
 
 .ticker span {
-  color: var(--gold);
+  color: var(--white);
 }
 
 @keyframes scroll-left {
@@ -797,6 +823,15 @@ nav.site-nav {
 
 .flock101-a a[target="_blank"]:hover {
   border-color: #fff;
+}
+
+.deflock-map {
+  display: block;
+  width: 100%;
+  max-width: 100ch;
+  height: 500px;
+  border: 1px solid rgb(255 255 255 / 10%);
+  margin-bottom: 1.5rem;
 }
 
 /* ── DEMANDS ───────────────────────────────────────────── */
@@ -1404,11 +1439,150 @@ div.person-card a {
   color: var(--red);
 }
 
+/* ── CALENDAR ──────────────────────────────────────────── */
+
+.calendar {
+  padding: 6rem 5vw;
+  background: var(--black);
+}
+
+.event-highlight {
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--red);
+  background: var(--dark);
+  padding: 2.2rem 2rem;
+  max-width: 720px;
+  margin-bottom: 1px;
+}
+
+.event-highlight-badge {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+
+.event-highlight-date {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--red);
+  margin-bottom: 0.6rem;
+}
+
+.event-highlight-title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.event-highlight-meta {
+  font-size: 0.95rem;
+  color: var(--dim);
+  margin-bottom: 1rem;
+}
+
+.event-highlight-desc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--dim);
+  margin-bottom: 1.4rem;
+}
+
+.event-empty {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.event-list {
+  display: grid;
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+  max-width: 720px;
+  margin-top: 1px;
+}
+
+.event-row {
+  background: var(--dark);
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  gap: 1.3rem;
+  align-items: baseline;
+}
+
+.event-row-date {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--red);
+  flex-shrink: 0;
+  width: 5.5rem;
+}
+
+.event-row-title {
+  font-size: 0.98rem;
+  color: var(--white);
+  margin-bottom: 0.2rem;
+}
+
+.event-row-meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
 /* ── MEETINGS ──────────────────────────────────────────── */
 
 .meetings {
   padding: 6rem 5vw;
   background: var(--dark);
+}
+
+.meetings-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+  margin-top: 2rem;
+}
+
+.meeting-item {
+  background: var(--black);
+  padding: 1.6rem 1.5rem;
+}
+
+.meeting-item-title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.meeting-item-schedule {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--red);
+  margin-bottom: 0.8rem;
+}
+
+.meeting-item-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--dim);
+  margin-bottom: 0.8rem;
+}
+
+.meeting-item a {
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 /* ── PUBLIC COMMENT SCRIPT ─────────────────────────────── */
@@ -1486,6 +1660,15 @@ div.person-card a {
   font-size: 0.85em;
 }
 
+.comment-box-empty {
+  border-left-color: var(--hairline);
+}
+
+.comment-box-empty p {
+  color: var(--muted);
+  font-style: italic;
+}
+
 .comment-copy {
   margin-top: 1.5rem;
   font-family: var(--mono);
@@ -1532,6 +1715,10 @@ div.person-card a {
   gap: 0.4rem;
 }
 
+.signup-field-wide {
+  grid-column: 1 / -1;
+}
+
 .signup-label {
   font-family: var(--mono);
   font-size: 0.66rem;
@@ -1545,7 +1732,8 @@ div.person-card a {
   color: #5c6b76;
 }
 
-.signup-form input {
+.signup-form input,
+.signup-form textarea {
   font-family: var(--body);
   font-size: 0.95rem;
   background: var(--black);
@@ -1555,7 +1743,13 @@ div.person-card a {
   width: 100%;
 }
 
-.signup-form input:focus {
+.signup-form textarea {
+  resize: vertical;
+  min-height: 84px;
+}
+
+.signup-form input:focus,
+.signup-form textarea:focus {
   outline: none;
   border-color: var(--red);
 }
@@ -1911,9 +2105,11 @@ footer.site-footer p {
   .federal,
   .demands,
   .action,
+  .calendar,
   .meetings,
   .comment,
-  .signup {
+  .signup,
+  .email-officals {
     padding: 4rem 5vw;
   }
 

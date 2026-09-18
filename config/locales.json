@@ -1,7 +1,9 @@
 {
   "sheets": {
-    "templates": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQOYTc4qaQsUwozfI7UddJI3SDGZ9Q6cjm2RN4rVTP8SXjwANHFQLHpQlFYb5v1rlBXTndIb4WFeCZl/pub?gid=0&single=true&output=csv",
-    "faqs": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRPyNclTBLo57lBpMOZXfUiunjGTbsMstTN02lhTB8aa5rS1wmDd2NWmcM9cZ1yXzqkkhSBnyI7HDGh/pub?gid=0&single=true&output=csv"
+    "templates": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTzhXnVkRLkYd_ncrY0-fNLqX6bvcwnD9XGbU1198no-qpFV-IBMMvdsQbIm-mLO5L3JAPFcuhX7_nD/pub?gid=0&single=true&output=csv",
+    "faqs": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWpAWBx9kh4YUJ0y24APn-nVBjzDpcNM6b7GN9c5a53dr8gQasisfBFoPFmG0VHANnRmv8GRei8HOa/pub?gid=0&single=true&output=csv",
+    "events": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRrWekgrBA-MSM_GNGHld-XTxZ0MG7nWGVl-PLMNH6fM7phpZIIiCNMERZyQDdxHvwh0V0DgilLGbcp/pub?gid=0&single=true&output=csv",
+    "comments": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSBuZ70F-RweSKIF0fzNl3ROW9uXpKVqL991iQ8dHnd2P9OT34QHd1RqzDT1EyXbwWZ-RZGsVRdNkhT/pub?gid=0&single=true&output=csv"
   },
   "locales": [
     {

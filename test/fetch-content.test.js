@@ -151,3 +151,22 @@ test('a genuine embedded newline in a quoted cell still works, and \\\\n is left
   assert.equal(out.get('fruita').templates[0].message, 'Line one\nLine two');
   assert.equal(out.get('palisade').templates[0].message, 'A literal \\\\n stays');
 });
+
+test('a locale header annotated with the valid values still maps to the locale field', async () => {
+  const annotated = {
+    'https://sheet/t.csv':
+      '"locale (all, grand-junction, fruita, palisade, mesa-county)",title,subject,message\n' +
+      'all,DeFlock,A comment about ALPRs,"Dear Councillors,\\n\\nI am writing to share my thoughts."\n',
+    'https://sheet/f.csv':
+      '"locale (grand-junction, fruita, palisade, mesa-county)",question,answer\n' +
+      'fruita,When are meetings?,"Tuesdays, 7pm"\n',
+  };
+  const out = await buildContent(config, async (url) => annotated[url], { readExisting: () => null });
+  assert.deepEqual(out.unknownLocales, []);
+  assert.deepEqual(
+    out.get('fruita').templates.map((t) => t.title),
+    ['DeFlock'],
+  );
+  assert.equal(out.get('fruita').templates[0].message, 'Dear Councillors,\n\nI am writing to share my thoughts.');
+  assert.deepEqual(out.get('fruita').faqs, [{ question: 'When are meetings?', answer: 'Tuesdays, 7pm' }]);
+});

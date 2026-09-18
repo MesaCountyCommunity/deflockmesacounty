@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 const config = JSON.parse(readFileSync(new URL('../config/locales.json', import.meta.url), 'utf8'));
 
 test('config has sheets and four locales in order', () => {
-  assert.deepEqual(Object.keys(config.sheets), ['templates', 'faqs']);
+  assert.deepEqual(Object.keys(config.sheets), ['templates', 'faqs', 'events', 'comments']);
   assert.deepEqual(config.locales.map(l => l.id),
     ['grand-junction', 'fruita', 'palisade', 'mesa-county']);
 });
