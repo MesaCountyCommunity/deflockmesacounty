@@ -286,7 +286,7 @@ nav.site-nav {
 }
 
 .hero-sub {
-  max-width: 740px;
+  max-width: 780px;
   margin-top: 2rem;
   font-size: 1.1rem;
   line-height: 1.65;
@@ -336,8 +336,16 @@ nav.site-nav {
 
 /* ── TICKER ────────────────────────────────────────────── */
 
+.ticker-padding {
+  padding-top: 56px;
+  padding-right: 0px;
+  padding-bottom 0px;
+  padding-left 0px;
+  background: var(--dark);
+}
+
 .ticker-wrap {
-  background: var(--red-dim);
+  background: var(--gold);
   padding: 10px 0;
   overflow: hidden;
   white-space: nowrap;
@@ -345,18 +353,29 @@ nav.site-nav {
   border-bottom: 1px solid rgb(255 255 255 / 10%);
 }
 
+.ticker-bold {
+  display: inline-block;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(1rem, 6vw, 1rem);
+  line-height: 1;
+  margin-bottom: 0.1rem;
+  text-transform: uppercase;
+  color: var(--black);
+  animation: scroll-left 800s linear infinite;
+}
+
 .ticker {
   display: inline-block;
   font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--white);
+  color: var(--black);
   animation: scroll-left 44s linear infinite;
 }
 
 .ticker span {
-  color: var(--gold);
+  color: var(--white);
 }
 
 @keyframes scroll-left {
