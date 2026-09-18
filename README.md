@@ -11,27 +11,35 @@ publishing anything on the actual domain
 
 | Part | State |
 |---|---|
-| Design system, layout, all three pages | Done |
+| Design system, layout, all pages | Done |
 | Contact tool, ported and integrated | Done, working against real data |
-| Scraper, validation, scheduled Actions | Done, 51 tests passing |
+| Scraper, validation, scheduled Actions | Done, 51+ tests passing |
 | CORA toolkit — statutes and request templates | Written and usable |
-| Campaign findings, stats, photos, comment scripts | **Placeholder** |
-| Mailing list form, meetings calendar | **Not connected** |
+| Campaign findings, stats, photos, meeting schedules | **Placeholder** |
+| Mailing list form | **Not connected** |
+| Events calendar pipeline | Built, needs a sheet URL — see CONTENT-TODO.md |
+| Public comment script pipeline | Built, needs a sheet URL — see CONTENT-TODO.md |
 
 ## How it works
 
-No build step, no server. Three HTML pages plus one stylesheet and two scripts:
+No build step, no server. HTML pages plus one stylesheet and two scripts:
 
 ```
-index.html          campaign landing page; hosts the contact tool at #act
+index.html          campaign landing page
 flock-101.html      explainer
+act.html            take-action page: calendar, meetings, comment scripts, contact tool
+join.html           working group signup (Google Form)
 cora.html           Colorado public records toolkit + request templates
 assets/css/         one stylesheet
 assets/js/site.js   page interactions (reveal, comment tabs, copy, signup)
-assets/js/contact-tool.js   the contact tool
+assets/js/contact-tool.js   the contact tool (act.html)
+assets/js/events.js the calendar renderer (act.html)
+assets/js/comments.js the comment-script renderer (act.html)
 config/locales.json the locale registry, maintained by hand
-data/*.json         scraped contacts + sheet content
-scraper/            the scrapers, validation, and diff summary
+data/*.json          scraped contacts + sheet content
+data/events.json     the events calendar, written by fetch-events.js
+data/comments.json   the public comment scripts, written by fetch-comments.js
+scraper/             the scrapers, validation, and diff summary
 ```
 
 The contact tool renders entirely from JSON at runtime:
@@ -49,17 +57,20 @@ Three GitHub Actions keep it current:
   anything changed. Nothing reaches the live site without review. Validation
   failures open an issue and leave the live data untouched, so a redesigned
   city website can never blank out the contact list.
-- **`content.yml`** (daily) pulls the Google Sheet into the content files and
-  commits directly.
+- **`content.yml`** (daily) pulls the Google Sheets into the content files,
+  the events calendar (`data/events.json`), and the public comment scripts
+  (`data/comments.json`), and commits directly.
 - **`test.yml`** runs the test suite on every push and pull request.
 
 ## Development
 
 ```bash
 npm install
-npm test                     # 51 tests: parsers, validation, CSV, data schema
+npm test                     # parsers, validation, CSV, data schema, events
 npm run scrape               # live scrape into data/
-npm run content              # pull the Google Sheet into data/
+npm run content               # pull the campaign Google Sheet into data/
+npm run events                # pull the events Google Sheet into data/events.json
+npm run comments              # pull the comments Google Sheet into data/comments.json
 python3 -m http.server 8080  # then open http://localhost:8080/
 ```
 
@@ -73,18 +84,23 @@ Edit the Google Sheet, not this repo: two tabs, `templates`
 `locale` column takes a locale id (`grand-junction`, `fruita`, `palisade`,
 `mesa-county`). `content.yml` pulls it in daily.
 
+The events calendar and the public comment scripts on `act.html` are each a
+separate sheet with their own tab — see "Setting up the events calendar" and
+"Setting up the public comment scripts" in CONTENT-TODO.md.
+
 ## How the contact tool is embedded
 
-It was ported from the standalone `mesaContactTool` repo. Two things differ, and
-both matter if you ever port it somewhere else:
+It was ported from the standalone `mesaContactTool` repo and lives on
+`act.html`. Two things differ, and both matter if you ever port it somewhere
+else:
 
 1. **Every container id is `ct-`-prefixed.** The campaign page has its own
    `<nav>`, `<footer>`, and tab-like controls, and the standalone tool's
    unprefixed ids (`#tabs`, `#panel`, `#footer`, `#output`) would have collided.
 2. **Locale selection writes `#contact-<id>` via `replaceState`.** The page's
-   own nav owns hashes like `#act` and `#findings`. A bare `#fruita` would have
-   fought them, and assigning `location.hash` on every tab click would have
-   buried the section anchors under a pile of history entries.
+   own nav owns hashes like `#calendar` and `#meetings`. A bare `#fruita` would
+   have fought them, and assigning `location.hash` on every tab click would
+   have buried the section anchors under a pile of history entries.
 
 ## Adding a locale
 

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join the Working Group — DeFlock Mesa County</title>
+    <meta
+      name="description"
+      content="Join the DeFlock Mesa County working group: sign up to get involved in removing automated license plate reader contracts in Mesa County, Colorado."
+    />
+    <!-- DRAFT: no search engine should index placeholder copy. Delete this
+         tag as part of the launch checklist in CONTENT-TODO.md. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <nav class="site-nav">
+      <a class="nav-logo" href="index.html"><span>De</span>Flock Mesa County</a>
+      <ul class="nav-links">
+        <li><a href="flock-101.html">Flock 101 →</a></li>
+        <li><a href="#locations">Camera Locations</a></li>
+        <li><a href="#demands">Goals</a></li>
+        <li><a href="act.html">Take Action</a></li>
+        <li><a href="join.html">Join</a></li>
+      </ul>
+    </nav>
+
+    <!-- ── TICKER ──────────────────────────────────────── -->
+    <section class="ticker-padding">
+    <!-- The list is duplicated so the -50% scroll loops seamlessly. Keep both
+         halves identical when editing. -->
+    <div class="ticker-wrap" aria-hidden="true">
+      <div class="ticker">
+        <p class="ticker-bold"><strong>Join our protest against Flock!</strong></p>
+        &nbsp;<span>|</span>&nbsp; Sunday, September 27th
+        &nbsp;<span>|</span>&nbsp; 10:30 am
+        &nbsp;<span>|</span>&nbsp; Spring Valley Park
+        &nbsp;<span>|</span>&nbsp; Patterson and 27 1/2 rd
+        &nbsp;<span>|</span>&nbsp; <p class="ticker-bold"><strong>Join our protest against Flock!</strong></p>
+        &nbsp;<span>|</span>&nbsp; Sunday, September 27th
+        &nbsp;<span>|</span>&nbsp; 10:30 am
+        &nbsp;<span>|</span>&nbsp; Spring Valley Park
+        &nbsp;<span>|</span>&nbsp; Patterson and 27 1/2 rd
+        &nbsp;<span>|</span>&nbsp;
+      </div>
+    </div>
+    </section>
+
+    <!-- ── HERO ────────────────────────────────────────── -->
+    <section class="hero">
+      <p class="hero-label">
+        <span>Mesa County, CO</span>
+      </p>
+      <h1>Join the<br /><em>Working Group</em></h1>
+      <p class="hero-sub">
+        DeFlock Mesa County is run entirely by volunteers. If you want to help
+        organize, show up to meetings, canvass, or just get looped in on
+        what's happening next, tell us a little about yourself below.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#signup">Sign Up ↓</a>
+        <a class="btn btn-outline" href="act.html">Take Action</a>
+      </div>
+    </section>
+
+    <!-- ── SIGNUP ──────────────────────────────────────── -->
+    <section class="signup" id="signup">
+      <p class="section-label">// Get Involved</p>
+      <h2 class="section-heading">Sign Up</h2>
+      <!-- Posts directly to a Google Form so this static site can collect
+           submissions with no backend. See CONTENT-TODO.md for setup steps. -->
+      <form
+        id="signup-form"
+        class="signup-form"
+        action="https://docs.google.com/forms/d/e/1FAIpQLSflo5MaCwr7q6wtKnrx5NO3UtqUjpNuYjutO-e-JVx_bFaiuw/formResponse"
+        method="POST"
+        target="signup-sink"
+      >
+        <div class="signup-field">
+          <label class="signup-label" for="signup-name">Name</label>
+          <input id="signup-name" name="entry.545265155" type="text" autocomplete="name" required />
+        </div>
+        <div class="signup-field">
+          <label class="signup-label" for="signup-email">Email</label>
+          <input id="signup-email" name="entry.815599880" type="email" autocomplete="email" required />
+        </div>
+        <div class="signup-field">
+          <label class="signup-label" for="signup-area">Where You Live</label>
+          <input
+            id="signup-area"
+            name="entry.350794906"
+            type="text"
+            placeholder="Neighborhood or part of the county"
+            autocomplete="address-level2"
+            required
+          />
+        </div>
+        <div class="signup-field signup-field-wide">
+          <label class="signup-label" for="signup-message">Message <em>(optional)</em></label>
+          <textarea id="signup-message" name="entry.1748928178" rows="3"></textarea>
+        </div>
+        <button class="signup-submit" type="submit">Join the Working Group</button>
+      </form>
+      <div class="signup-success" id="signup-success" hidden>
+        <p><strong>You're on the list.</strong><br />We'll be in touch about how to get involved.</p>
+      </div>
+      <iframe name="signup-sink" id="signup-sink" hidden title="Signup submission target"></iframe>
+    </section>
+
+    <footer class="site-footer">
+      <p>DeFlock Mesa County</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <span>·</span>
+        <a href="flock-101.html">Flock 101</a>
+        <span>·</span>
+        <a href="https://deflock.me/" target="_blank" rel="noopener">deflock.me</a>
+      </div>
+    </footer>
+
+    <script src="assets/js/site.js"></script>
+  </body>
+</html>

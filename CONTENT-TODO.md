@@ -20,13 +20,18 @@ Work top to bottom. The site should not go public until every box is ticked.
       real images. Drop JPGs in `assets/images/` and replace each placeholder
       div with `<img src="assets/images/NAME.jpg" alt="..." loading="lazy" />`.
 - [ ] **Google Form** for the mailing list (see below).
-- [ ] **Google Calendar** of local meetings — replace the `href="#"` on the
-      "View The Calendar" button in the Meetings section.
+- [ ] **Events sheet** for the calendar on `act.html` (see below) — until it's
+      connected, the calendar just shows whatever is hand-edited into
+      `data/events.json`.
+- [ ] **Meeting schedules** — three `class="todo"` spans in the Meetings
+      section of `act.html` need the real day/time/cadence for Grand Junction
+      City Council, Mesa County Board of Commissioners, and their agenda/
+      workshop sessions.
 - [ ] **Working group contact email** — two `data-todo` placeholders, one in
       the closing banner and one in each footer.
-- [ ] **Public comment scripts** — six boxes (2 jurisdictions × 3 lengths) in
-      the Comment section. Every combination must be filled; `site.js` hides all
-      but the matching one, so a missing combination shows an empty section.
+- [ ] **Comments sheet** for the public comment scripts on `act.html` (see
+      below) — until it's connected, every jurisdiction × length combination
+      shows a "hasn't been written yet" placeholder box.
 - [ ] **Remove the draft banner** — delete the `<div class="todo-banner">` from
       all three pages.
 - [ ] **Remove `<meta name="robots" content="noindex, nofollow">`** from all
@@ -37,25 +42,82 @@ Work top to bottom. The site should not go public until every box is ticked.
 
 ## Setting up the mailing list form
 
-The signup form posts directly to a Google Form, which is what lets a static
-GitHub Pages site collect submissions with no backend. Until it is configured,
-`site.js` blocks submission and shows an alert rather than faking success.
+The signup form lives on `join.html` and posts directly to a Google Form,
+which is what lets a static GitHub Pages site collect submissions with no
+backend. Until it is configured, `site.js` blocks submission and shows an
+alert rather than faking success.
 
-1. Create a Google Form with three short-answer questions: Name, Email, and
-   "What part of the county?".
+1. Create a Google Form with four questions: Name (short answer), Email
+   (short answer), Where You Live (short answer), and Message (paragraph,
+   marked not required).
 2. Open the live form, right-click → **View Page Source**.
 3. Search the source for `entry.` — each question has an id like
    `entry.1646014132`. Note which id belongs to which question.
 4. Get the form's POST URL: it is the form's `/viewform` URL with `/viewform`
    replaced by `/formResponse`.
-5. In `index.html`, replace:
+5. In `join.html`, replace:
    - `FORM_ID_HERE` in the form's `action` with the real form id
-   - `entry.NAME_ID`, `entry.EMAIL_ID`, `entry.AREA_ID` with the real ids
+   - `entry.NAME_ID`, `entry.EMAIL_ID`, `entry.AREA_ID`, `entry.MESSAGE_ID`
+     with the real ids
 6. Submit the form once on the live site and confirm the row lands in the
    linked spreadsheet.
 
 The `target="signup-sink"` hidden iframe is what keeps the visitor on the page
 instead of bouncing them to Google's confirmation screen. Leave it in place.
+
+## Setting up the events calendar
+
+The calendar on `act.html` reads `data/events.json`, which is written by
+`scraper/fetch-events.js` from a Google Sheet — same pattern as the campaign
+templates/FAQs, so anyone in the working group can add an event without
+touching code.
+
+1. Create a Google Sheet with one tab and these columns: `date` (YYYY-MM-DD),
+   `time` (free text, e.g. `10:30 am`), `title`, `location`, `description`
+   (optional), `link` (optional — "more info" URL), `featured` (optional —
+   `yes` to pin this event as the highlighted one instead of the soonest
+   upcoming event).
+2. **File → Share → Publish to web**, choose that tab, and export as CSV. Copy
+   the published URL.
+3. Paste it into `config/locales.json` as `sheets.events` (currently `null`).
+4. Run `npm run events` to confirm it fetches and writes `data/events.json`.
+   `content.yml` then keeps it current daily, same as templates/FAQs.
+
+Until step 3 is done, `fetch-events.js` is a no-op and the calendar keeps
+showing whatever's hand-edited into `data/events.json` (currently just the
+September 27th protest from the ticker).
+
+## Setting up the public comment scripts
+
+The six comment boxes on `act.html` (2 jurisdictions × 3 lengths) are
+rendered from `data/comments.json`, written by `scraper/fetch-comments.js`
+from a Google Sheet — same pattern as the events calendar, so any
+collaborator can add or rewrite a script without touching code.
+
+1. Create a Google Sheet with one tab and these columns: `jurisdiction`
+   (`gj`, `mesa`, or `all`), `length` (`short`, `personal`, or `long`),
+   `message` — the whole script, written as you'd say it out loud. Wrap any
+   part the speaker should fill in themselves in square brackets, e.g. `My
+   name is [your name] and I'm a resident of [neighborhood].` — those render
+   as highlighted blanks on the page automatically. A blank line between
+   sentences in the cell starts a new paragraph.
+2. `jurisdiction: all` is a script every jurisdiction uses unless that
+   jurisdiction has its own row for the same length, which wins instead —
+   use it whenever the speaking notes don't need to differ by jurisdiction,
+   and it'll also cover any jurisdiction added later (see "Adding a locale"
+   in the README) without needing a new row.
+3. One row per jurisdiction+length combination (6 total for full coverage
+   today, more once another jurisdiction is added — but any subset works, or
+   just `all` rows for all 3 lengths. A combination with no row and no
+   matching `all` row just shows a "hasn't been written yet" placeholder
+   instead of breaking anything). If two rows share a jurisdiction+length,
+   the later row wins.
+4. **File → Share → Publish to web**, choose that tab, and export as CSV.
+   Copy the published URL.
+5. Paste it into `config/locales.json` as `sheets.comments` (currently
+   `null`).
+6. Run `npm run comments` to confirm it fetches and writes
+   `data/comments.json`. `content.yml` then keeps it current daily.
 
 ## Section-by-section
 
@@ -88,10 +150,12 @@ The third demand (the ordinance ask) is written and does not need local data.
 The other three do. The contract renewal date is the single most useful thing
 to find — it is the deadline that makes the whole campaign urgent.
 
-### Take Action
-Already working — this is the ported contact tool, live against real scraped
-data. No content TODO here. Campaign message templates are edited in the Google
-Sheet, not in this repo; see the README.
+### Take Action (`act.html`)
+The contact tool itself is working — live against real scraped data, no
+content TODO there. Campaign message templates are edited in the Google
+Sheet, not in this repo; see the README. What's still placeholder on this
+page: the meeting schedules are `todo` spans, and both the events sheet and
+the comments sheet aren't connected yet (see above for each).
 
 ### Flock 101 (`flock-101.html`)
 Mostly written and locally-neutral. The "What that looks like in Mesa County"

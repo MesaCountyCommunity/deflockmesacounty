@@ -1,0 +1,23 @@
+{
+  "fetchedAt": "2026-09-18T07:42:59.320Z",
+  "events": [
+    {
+      "date": "2026-09-27",
+      "time": "10:30 AM",
+      "title": "Protest Against Flock",
+      "location": "Spring Valley Park — Patterson and 27 1/2 Rd",
+      "description": "",
+      "link": "",
+      "featured": false
+    },
+    {
+      "date": "2026-10-07",
+      "time": "5:30 PM",
+      "title": "GJ City Council Meeting",
+      "location": "City Hall Auditorium, 250 N 5th Street",
+      "description": "Also can watch online",
+      "link": "https://grandjunctionco.portal.civicclerk.com/event/3824/files",
+      "featured": false
+    }
+  ]
+}
