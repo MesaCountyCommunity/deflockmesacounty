@@ -40,13 +40,6 @@ html {
   scroll-padding-top: 112px;
 }
 
-/* The draft banner is sticky under the nav, so while it is present an
-   anchor target needs to clear both. Self-corrects when the banner is
-   dismissed for the session or deleted at launch. */
-html:has(#draft-banner:not([hidden])) {
-  scroll-padding-top: 124px;
-}
-
 body {
   background: var(--black);
   color: var(--white);
@@ -1971,7 +1964,9 @@ footer.site-footer p {
   color: var(--muted);
 }
 
-/* ── ARTICLE PAGES (flock-101, cora) ───────────────────── */
+/* ── ARTICLE PAGES ──────────────────────────────────────── */
+/* .page-head/.page-body/.prose below were shared with cora.html, which has
+   been removed (see CORA-CCJRA-REFERENCE.md) — no page currently uses them. */
 
 .page-head {
   padding: 120px 5vw 3rem;
@@ -2066,34 +2061,6 @@ footer.site-footer p {
   border-bottom: 1px dashed var(--gold);
   color: var(--gold);
   padding: 0 3px;
-}
-
-.todo-banner {
-  position: sticky;
-  top: 56px;
-  z-index: 90;
-  background: var(--gold);
-  color: var(--black);
-  padding: 0.7rem 5vw;
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  line-height: 1.7;
-}
-
-.todo-banner strong {
-  font-weight: 700;
-}
-
-.todo-banner button {
-  font: inherit;
-  background: transparent;
-  border: 1px solid rgb(0 0 0 / 40%);
-  color: var(--black);
-  padding: 0.25rem 0.7rem;
-  margin-left: 0.6rem;
-  cursor: pointer;
 }
 
 /* ── RESPONSIVE ────────────────────────────────────────── */

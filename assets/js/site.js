@@ -116,25 +116,3 @@ if (signupForm && signupSuccess && signupSink) {
     );
   });
 }
-
-// ── Draft banner ─────────────────────────────────────────
-// Dismissible for the session only (sessionStorage, not localStorage) so
-// it comes back on the next visit and can't be permanently forgotten while
-// placeholder copy is still live.
-const draftBanner = document.getElementById("draft-banner");
-if (draftBanner) {
-  const KEY = "deflock-mesa-draft-banner-dismissed";
-  try {
-    if (sessionStorage.getItem(KEY) === "1") draftBanner.hidden = true;
-  } catch {
-    /* private browsing */
-  }
-  draftBanner.querySelector("button")?.addEventListener("click", () => {
-    draftBanner.hidden = true;
-    try {
-      sessionStorage.setItem(KEY, "1");
-    } catch {
-      /* private browsing */
-    }
-  });
-}
