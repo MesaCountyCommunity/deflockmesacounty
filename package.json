@@ -8,7 +8,8 @@
     "scrape": "node scraper/scrape.js",
     "content": "node scraper/fetch-content.js",
     "events": "node scraper/fetch-events.js",
-    "comments": "node scraper/fetch-comments.js"
+    "comments": "node scraper/fetch-comments.js",
+    "ticker": "node scraper/fetch-ticker.js"
   },
   "dependencies": { "cheerio": "^1.0.0" }
 }

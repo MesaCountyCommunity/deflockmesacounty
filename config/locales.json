@@ -3,7 +3,8 @@
     "templates": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTzhXnVkRLkYd_ncrY0-fNLqX6bvcwnD9XGbU1198no-qpFV-IBMMvdsQbIm-mLO5L3JAPFcuhX7_nD/pub?gid=0&single=true&output=csv",
     "faqs": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWpAWBx9kh4YUJ0y24APn-nVBjzDpcNM6b7GN9c5a53dr8gQasisfBFoPFmG0VHANnRmv8GRei8HOa/pub?gid=0&single=true&output=csv",
     "events": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRrWekgrBA-MSM_GNGHld-XTxZ0MG7nWGVl-PLMNH6fM7phpZIIiCNMERZyQDdxHvwh0V0DgilLGbcp/pub?gid=0&single=true&output=csv",
-    "comments": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSBuZ70F-RweSKIF0fzNl3ROW9uXpKVqL991iQ8dHnd2P9OT34QHd1RqzDT1EyXbwWZ-RZGsVRdNkhT/pub?gid=0&single=true&output=csv"
+    "comments": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSBuZ70F-RweSKIF0fzNl3ROW9uXpKVqL991iQ8dHnd2P9OT34QHd1RqzDT1EyXbwWZ-RZGsVRdNkhT/pub?gid=0&single=true&output=csv",
+    "ticker": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNA7aEGaq4uVzYcQJ3BOlDEM5mYgdorWma_NIViCNmWijbzolxIbsbYRd2q9gpf_oy9kBuuDdKqMnU/pub?gid=0&single=true&output=csv"
   },
   "locales": [
     {
