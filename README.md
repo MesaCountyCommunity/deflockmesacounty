@@ -26,7 +26,7 @@ act.html            take-action page: calendar, meetings, comment scripts, conta
 join.html           working group signup (Google Form)
 CORA-CCJRA-REFERENCE.md  CORA/CCJRA content, held for a future action tool
 assets/css/         one stylesheet
-assets/js/site.js   page interactions (reveal, comment tabs, copy, signup)
+assets/js/site.js   page interactions (ticker, reveal, comment tabs, copy, signup)
 assets/js/contact-tool.js   the contact tool (act.html)
 assets/js/events.js the calendar renderer (act.html)
 assets/js/comments.js the comment-script renderer (act.html)
@@ -68,10 +68,10 @@ runs list) to trigger it immediately instead of waiting for its schedule.
 
 ## Updating the sheet content
 
-Four Google Sheets feed the site, each pulled by its own script in
+Five Google Sheets feed the site, each pulled by its own script in
 `scraper/` and each configured as a URL under `sheets` in
 `config/locales.json`. Edit the sheet, not this repo — `content.yml` pulls
-all four in daily, and each also has an `npm run` script for pulling it by
+all five in daily, and each also has an `npm run` script for pulling it by
 hand:
 
 | Sheet | Purpose | Columns | Writes to | Pulled by |
@@ -80,8 +80,9 @@ hand:
 | FAQs | Questions/answers shown alongside the contact tool | `locale, question, answer` | `data/<locale>.content.json` | `npm run content` |
 | Public Comment | Scripts for speaking to city council / county commissioners | `jurisdiction, length, message` | `data/comments.json` | `npm run comments` |
 | Events | The events calendar on `act.html` | `date, time, title, location, description, link, featured` | `data/events.json` | `npm run events` |
+| Ticker | The scrolling bar under the nav on every page | `mode, text, style, show_until` | `data/ticker.json` | `npm run ticker` |
 
-Notes that apply across all four:
+Notes that apply across all of them:
 
 - The **Templates** and **FAQs** tabs live in one sheet and share the
   `locale` column, which takes a locale id (`grand-junction`, `fruita`,
@@ -101,10 +102,33 @@ Notes that apply across all four:
   (Alt+Enter makes the column unreadable to edit); the fetch scripts convert
   them to real line breaks.
 
+### The ticker sheet
+
+Cell **A2** (the first row under the `mode` header) switches the ticker
+between three modes; every other cell in column A is ignored, so black them
+out in the sheet:
+
+- **`calendar`** — "Next DeFlock Event" followed by the next upcoming event
+  from the Events sheet (the soonest `featured` one if any, else the
+  soonest — the same event `act.html` highlights).
+- **`custom`** — the `text` rows, in sheet order. `style` is `heading` (the
+  highlighted callout), `bold`, or blank for plain text; a `bold` row starts
+  a new group and gets a wider gap before it. `show_until` (YYYY-MM-DD,
+  optional) hides a row after that day; leave it blank for standing
+  announcements. Blank rows are ignored.
+- **`off`** — no ticker; the page closes up the space.
+
+It falls back on its own: a `custom` ticker whose rows have all expired
+(a leftover heading doesn't count) shows the calendar instead, and a
+calendar with nothing upcoming hides the ticker. A blank or misspelled mode
+keeps the ticker that's live and fails the workflow so it opens an issue.
+If `data/ticker.json` can't load in the browser, the ticker stays hidden
+rather than showing stale text.
+
 To point one of these at a real sheet: **File → Share → Publish to web**,
 choose the tab, export as CSV, and paste the published URL into the matching
 key under `sheets` in `config/locales.json` (`templates`, `faqs`, `events`,
-`comments`).
+`comments`, `ticker`).
 
 ## How the contact tool is embedded
 
@@ -152,6 +176,7 @@ npm run scrape               # live scrape into data/
 npm run content               # pull the campaign Google Sheet into data/
 npm run events                # pull the events Google Sheet into data/events.json
 npm run comments              # pull the comments Google Sheet into data/comments.json
+npm run ticker                # pull the ticker Google Sheet into data/ticker.json
 python3 -m http.server 8080  # then open http://localhost:8080/
 ```
 

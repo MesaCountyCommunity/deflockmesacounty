@@ -1,0 +1,41 @@
+{
+  "fetchedAt": "2026-09-28T19:35:00.212Z",
+  "mode": "custom",
+  "items": [
+    {
+      "text": "Join us at upcoming Public Meetings",
+      "style": "heading",
+      "showUntil": "2026-10-07"
+    },
+    {
+      "text": "County Commissioners Meeting",
+      "style": "bold",
+      "showUntil": "2026-09-29"
+    },
+    {
+      "text": "9:00 AM - Tuesday, Sept 29th",
+      "style": "",
+      "showUntil": "2026-09-29"
+    },
+    {
+      "text": "544 Rood Ave",
+      "style": "",
+      "showUntil": "2026-09-29"
+    },
+    {
+      "text": "GJ City Council",
+      "style": "bold",
+      "showUntil": "2026-10-07"
+    },
+    {
+      "text": "5:30 PM - Wednesday, Oct 7th",
+      "style": "",
+      "showUntil": "2026-10-07"
+    },
+    {
+      "text": "City Hall Auditorium",
+      "style": "",
+      "showUntil": "2026-10-07"
+    }
+  ]
+}
