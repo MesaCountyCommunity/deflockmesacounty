@@ -39,3 +39,32 @@ test('fruita: a wrapped, prefilled or off-domain mailto href is filtered, not pa
   assert.equal(people.find(p => p.name === 'Injected Person').email, null);
   assert.equal(people.find(p => p.name === 'Prefilled Person').email, 'mbreman@fruita.org');
 });
+
+// Cloudflare's "email address obfuscation" rewrites mailto: links to
+// /cdn-cgi/l/email-protection#<hex>: one hex byte of XOR key, then the address
+// XORed with it. Fruita's live page started serving this, which made every
+// council member look email-less and failed the scheduled scrape.
+function cfEncode(email, key = 0xf6) {
+  return [key, ...Buffer.from(email).map(b => b ^ key)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+test('fruita: decodes Cloudflare-obfuscated emails, still enforcing the domain rule', async () => {
+  const html = `<html><body><div class="widgetStaffDirectory"><ul>
+    <li class="widgetItem h-card">
+      <span class="p-name">Matthew Breman</span><span class="p-job-title">Mayor</span>
+      <div class="u-email"><a href="/cdn-cgi/l/email-protection#${cfEncode('mbreman@fruita.org')}">Email</a></div>
+    </li>
+    <li class="widgetItem h-card">
+      <span class="p-name">Off Domain</span><span class="p-job-title">Council Member</span>
+      <div class="u-email"><a href="/cdn-cgi/l/email-protection#${cfEncode('evil@attacker.com', 0x2a)}">Email</a></div>
+    </li>
+    <li class="widgetItem h-card">
+      <span class="p-name">Garbage Hex</span><span class="p-job-title">Council Member</span>
+      <div class="u-email"><a href="/cdn-cgi/l/email-protection#zz">Email</a></div>
+    </li>
+  </ul></div></body></html>`;
+  const people = await scrape(async () => html, cfg);
+  assert.equal(people.find(p => p.name === 'Matthew Breman').email, 'mbreman@fruita.org');
+  assert.equal(people.find(p => p.name === 'Off Domain').email, null);
+  assert.equal(people.find(p => p.name === 'Garbage Hex').email, null);
+});
