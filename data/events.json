@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-13T19:55:56.289Z",
+  "fetchedAt": "2026-10-14T05:15:34.649Z",
   "events": [
     {
       "date": "2026-09-27",
@@ -26,6 +26,15 @@
       "location": "City Hall Auditorium, 250 N 5th Street",
       "description": "Also can watch online",
       "link": "https://grandjunctionco.portal.civicclerk.com/event/3824/files",
+      "featured": false
+    },
+    {
+      "date": "2026-10-21",
+      "time": "5:30 PM",
+      "title": "GJ City Council Meeting",
+      "location": "City Hall Auditorium, 250 N 5th Street",
+      "description": "Also can watch online",
+      "link": "https://grandjunctionco.portal.civicclerk.com/event/3825/files",
       "featured": false
     }
   ]
