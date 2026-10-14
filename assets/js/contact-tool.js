@@ -463,6 +463,8 @@ function showOutput() {
     labeledField('Subject', subject),
     labeledField('Message', message),
     send, notice, manual);
+  // Start on a random template so residents don't all send the same first one.
+  pick.value = String(Math.floor(Math.random() * templates.length));
   applyTemplate();
   out.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   // Move focus into the newly revealed panel for keyboard/AT users, without
