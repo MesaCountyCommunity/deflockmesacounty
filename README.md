@@ -58,8 +58,8 @@ runs list) to trigger it immediately instead of waiting for its schedule.
   anything changed. Nothing reaches the live site without review. Validation
   failures open an issue and leave the live data untouched, so a redesigned
   city website can never blank out the contact list.
-- **`content.yml`** (daily, plus "Run workflow") pulls all four Google
-  Sheets — templates, FAQs, events, and public comment scripts — into
+- **`content.yml`** (daily, plus "Run workflow") pulls all five Google
+  Sheets — templates, FAQs, events, public comment scripts, and the ticker — into
   `data/`, and **commits directly to `main`** with no PR, since sheet edits
   are already reviewed by whoever owns the sheet. A fetch that comes back
   empty never overwrites existing data (see "Updating the sheet content"
@@ -84,9 +84,9 @@ hand:
 
 Notes that apply across all of them:
 
-- The **Templates** and **FAQs** tabs live in one sheet and share the
-  `locale` column, which takes a locale id (`grand-junction`, `fruita`,
-  `palisade`, `mesa-county`) or `all`.
+- **Templates** and **FAQs** are two separate Google Sheets (each with its
+  own published URL) that use the same `locale` column, which takes a locale
+  id (`grand-junction`, `fruita`, `palisade`, `mesa-county`) or `all`.
 - **Public Comment** rows use `jurisdiction` (`gj`, `mesa`, or `all`) and
   `length` (`short`, `personal`, or `long`); an `all` row covers any
   jurisdiction without its own row for that length, including one added
@@ -98,9 +98,11 @@ Notes that apply across all of them:
 - A sheet that comes back empty never wipes out the existing data file —
   the fetch fails loudly (an issue on `content.yml`, a non-zero exit
   locally) instead of publishing a blank page.
-- Paragraph breaks in a cell are written as the two literal characters `\n`
-  (Alt+Enter makes the column unreadable to edit); the fetch scripts convert
-  them to real line breaks.
+- Paragraph breaks in a cell can be written either way: the two literal
+  characters `\n`, or a real line break typed with Alt+Enter (Ctrl+Enter on
+  some setups). Both come through as line breaks; `\n` is easier to read and
+  edit in a narrow column, so it is the convention. (Applies to the Templates,
+  FAQs, Public Comment and Events sheets; the Ticker is single-line.)
 
 ### The ticker sheet
 
