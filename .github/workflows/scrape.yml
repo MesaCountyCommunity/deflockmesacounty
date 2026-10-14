@@ -56,3 +56,6 @@ jobs:
           title: 'Contact data updates from scheduled scrape'
           body-path: pr-body.md
           commit-message: 'chore: scraped contact data update'
+      - name: Fail the run if the scrape failed
+        if: steps.scrape.outputs.failed == 'true'
+        run: exit 1
