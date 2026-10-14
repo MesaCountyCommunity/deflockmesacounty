@@ -1,5 +1,5 @@
 {
-  "scrapedAt": "2026-08-16T23:36:30.892Z",
+  "scrapedAt": "2026-10-14T04:05:06.419Z",
   "bodies": {
     "council": [
       {
@@ -11,19 +11,19 @@
         "profileUrl": null
       },
       {
-        "name": "Amy Miller",
-        "title": "Mayor Pro-Tem",
-        "district": null,
-        "email": "amiller@fruita.org",
-        "phone": "970-640-0751",
-        "profileUrl": null
-      },
-      {
         "name": "Aaron Hancey",
         "title": "Council Member",
         "district": null,
         "email": "ahancey@fruita.org",
         "phone": "970-261-5413",
+        "profileUrl": null
+      },
+      {
+        "name": "Amy Miller",
+        "title": "Mayor Pro-Tem",
+        "district": null,
+        "email": "amiller@fruita.org",
+        "phone": "970-640-0751",
         "profileUrl": null
       },
       {
@@ -35,11 +35,11 @@
         "profileUrl": null
       },
       {
-        "name": "Todd Kumro",
+        "name": "Jared Prochnow",
         "title": "Council Member",
         "district": null,
-        "email": "tkumro@fruita.org",
-        "phone": "970-858-7675",
+        "email": "jprochnow@fruita.org",
+        "phone": "970-234-1309",
         "profileUrl": null
       },
       {
@@ -51,11 +51,11 @@
         "profileUrl": null
       },
       {
-        "name": "Jared Prochnow",
+        "name": "Todd Kumro",
         "title": "Council Member",
         "district": null,
-        "email": "jprochnow@fruita.org",
-        "phone": "970-234-1309",
+        "email": "tkumro@fruita.org",
+        "phone": "970-858-7675",
         "profileUrl": null
       }
     ]
